@@ -6,7 +6,7 @@ const {
   edit,
   update,
   delete: _delete,
-} = require("../controllers/ResourceController");
+} = require("../controllers/DatasController");
 
 function auth(req, res, next) {
   if (!req.isAuthenticated()) {

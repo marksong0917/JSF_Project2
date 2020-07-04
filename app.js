@@ -5,6 +5,7 @@ console.clear();
 const express = require("express");
 const app = express();
 require("dotenv").config();
+const path = require("path");
 
 /*
   Step 2: Setup Mongoose (using environment variables)
@@ -25,6 +26,16 @@ mongoose
 /*
   Step 3: Setup and configure Passport
 */
+const passport = require("passport");
+const session = require("express-session");
+app.use(
+  session({
+    secret: "any salty secret here",
+    resave: true,
+    saveUninitialized: false,
+  })
+);
+
 app.use(passport.initialize());
 app.use(passport.session());
 const User = require("./models/user");

@@ -1,43 +1,76 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <a class="navbar-brand" href="/">GuessIT!</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a href="/" class="navbar-brand">Data Center Ontario</a>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/">Home</a>
+        <a href="/" class="nav-link">Home</a>
       </li>
 
-      <% if (authorized) { %>
-        
-      <% } %>
+      <li class="nav-item">
+        <a href="/about" class="nav-link">About</a>
+      </li>
+
+      <li class="nav-item">
+        <a href="/contact" class="nav-link">Contact</a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a
+          href="#"
+          class="nav-link dropdown-toggle"
+          id="datasDropdown"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Datas
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="datasDropdown">
+          <a href="/datas" class="dropdown-item">Data List</a>
+          <% if (authorized) { %>
+          <div class="dropdown-divider"></div>
+          <a href="/datas/new" class="dropdown-item">New Data</a>
+          <% } %>
+        </div>
+      </li>
     </ul>
 
     <ul class="navbar-nav">
-      <% if (!authorized) { %>
-        <li class="nav-item">
-          <a href="/users/new" class="nav-link">
-            <i class="fa fa-user-plus"></i>
-            Register
-          </a>
-        </li>
+      <% if (authorized) {%>
+      <li class="nav-item">
+        <a href="/logout" class="nav-link">
+          <i class="fa fa-sign-out"></i>
+          Logout
+        </a>
+      </li>
+      <%} else { %>
+      <li class="nav-item">
+        <a href="/register" class="nav-link">
+          <i class="fa fa-user-plus"></i>
+          Register
+        </a>
+      </li>
 
-        <li class="nav-item">
-          <a href="/login" class="nav-link">
-            <i class="fa fa-sign-in"></i>
-            Login
-          </a>
-        </li>
-      <% } else { %>
-        <li class="nav-item">
-          <a href="/logout" class="nav-link">
-            <i class="fa fa-sign-out"></i>
-            Logout
-          </a>
-        </li>
+      <li class="nav-item">
+        <a href="/login" class="nav-link">
+          <i class="fa fa-sign-in"></i>
+          Login
+        </a>
+      </li>
       <% } %>
     </ul>
   </div>

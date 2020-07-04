@@ -43,7 +43,7 @@ const DataSchema = new mongoose.Schema(
 
 // Query Helpers
 
-BlogSchema.virtual("short").get(function () {
+DataSchema.virtual("short").get(function () {
   const temp = this.content;
   return temp.replace(/(<([^>]+)>)/gi, "").substring(0, 250);
 });
