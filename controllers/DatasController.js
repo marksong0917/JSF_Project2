@@ -43,7 +43,7 @@ exports.show = async (req, res) => {
     const data = await Data.findById(req.params.id).populate("user");
     console.log(data);
     res.render(`${viewPath}/show`, {
-      pageTitle: blog.title,
+      pageTitle: data.title,
       data: data,
     });
   } catch (error) {
@@ -67,7 +67,7 @@ exports.create = async (req, res) => {
     const data = await Data.create({ user: user._id, ...req.body });
 
     req.flash("success", "Data created successfully");
-    res.redirect(`/datas/${blog.id}`);
+    res.redirect(`/datas/${data.id}`);
   } catch (error) {
     req.flash("danger", `There was an error creating this data: ${error}`);
     req.session.formData = req.body;
