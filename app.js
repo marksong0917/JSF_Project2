@@ -21,6 +21,7 @@ mongoose
     useCreateIndex: true,
   })
   .catch((err) => console.error(`Error: ${err}`));
+
 /*
   Step 3: Setup and configure Passport
 */
@@ -63,6 +64,7 @@ app.use("/", (req, res, next) => {
   // Authentication helper
   res.locals.authorized = req.isAuthenticated();
   if (res.locals.authorized) res.locals.email = req.session.passport.user;
+
   next();
 });
 
@@ -71,6 +73,7 @@ app.use("/", (req, res, next) => {
 */
 const routes = require("./routes.js");
 app.use("/", routes);
+
 /*
   Step 8: Start the server
 */

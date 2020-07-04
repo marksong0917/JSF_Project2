@@ -11,17 +11,17 @@ const {
 function auth(req, res, next) {
   if (!req.isAuthenticated()) {
     req.flash("danger", "You need to login first.");
-    return res.redirect("/resource");
+    return res.redirect("/login");
   }
   next();
 }
 
 module.exports = (router) => {
-  router.get("/resource", index); // public
-  router.get("/resource/new", auth, _new); // authenticated
-  router.post("/resource", auth, create); // authenticated
-  router.post("/resource/update", auth, update); // authenticated
-  router.post("/resource/_delete", auth, _delete); // authenticated
-  router.get("/resource/:id/edit", auth, edit); // authenticated
-  router.get("/resource/:id", show); // public
+  router.get("/datas", index);
+  router.get("/datas/new", auth, _new);
+  router.post("/datas", auth, create);
+  router.post("/datas/update", auth, update);
+  router.post("/datas/delete", auth, _delete);
+  router.get("/datas/:id/edit", auth, edit);
+  router.get("/datas/:id", show);
 };

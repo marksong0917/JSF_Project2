@@ -1,5 +1,7 @@
-const { home, about } = require('../controllers/PagesController');
+const { home, about } = require("../controllers/PagesController");
 
-module.exports = router => {
-  router.get('/', home);
+module.exports = (router) => {
+  router.get("/", home);
+
+  router.get("/about", about);
 };

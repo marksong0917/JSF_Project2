@@ -1,9 +1,9 @@
-const User = require("../models/User");
+const User = require("../models/user");
 const passport = require("passport");
 const viewPath = "sessions";
 
 exports.new = (req, res) => {
-  res.render(`${viewPath}/login`, {
+  res.render(`${viewPath}/new`, {
     pageTitle: "Login",
   });
 };
@@ -11,7 +11,7 @@ exports.new = (req, res) => {
 // Step 1: Create an action that will authenticate the user using Passport
 exports.create = (req, res, next) => {
   passport.authenticate("local", {
-    successRedirect: "/blogs",
+    successRedirect: "/datas",
     successFlash: "You were successfully logged in.",
     failureRedirect: "/login",
     failureFlash: "Invalid credentials",
