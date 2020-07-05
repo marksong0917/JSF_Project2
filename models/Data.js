@@ -48,4 +48,4 @@ DataSchema.virtual("short").get(function () {
   return temp.replace(/(<([^>]+)>)/gi, "").substring(0, 250);
 });
 //TODO
-module.exports = mongoose.model("Data", DataSchema);
+module.exports = mongoose.model("data", DataSchema);
