@@ -42,10 +42,10 @@ const DataSchema = new mongoose.Schema(
 );
 
 // Query Helpers
-
+//TODO
 DataSchema.virtual("short").get(function () {
   const temp = this.content;
-  return temp.replace(/(<([^>]+)>)/gi, "").substring(0, 250);
+  return temp.substring(0, 125);
 });
-//TODO
+
 module.exports = mongoose.model("data", DataSchema);
