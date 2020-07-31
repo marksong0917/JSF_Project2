@@ -10,12 +10,12 @@ const {
 
 function auth(req, res, next) {
   if (!req.isAuthenticated()) {
-    req.flash("danger", "You need to login first.");
-    return res.redirect("/login");
+    return res
+      .status(401)
+      .json({ message: "Must be authenticated before using this API Call" });
   }
   next();
 }
-
 module.exports = (router) => {
   router.get("/datas", index);
   router.get("/datas/new", auth, _new);

@@ -1,20 +1,3 @@
-// INSTRUCTIONS:
-/*
-  Create a new resource controller that uses the
-  User as an associative collection (examples):
-  - User -> Books
-  - User -> Reservation
-
-  The resource controller must contain the 7 resource actions:
-  - index 1
-  - show 2
-  - new 3
-  - create 4
-  - edit 5
-  - update 6
-  - delete 7 
-*/
-
 const viewPath = "datas";
 const Data = require("../models/Data");
 const User = require("../models/user");
@@ -25,30 +8,23 @@ exports.index = async (req, res) => {
       .populate("user")
       .sort({ updatedAt: "desc" });
 
-    res.render(`${viewPath}/index`, {
-      pageTitle: "Data List",
-      datas: datas,
-    });
+    res.status(200).json(blogs);
   } catch (error) {
-    req.flash(
-      "danger",
-      `There was an error displaying the data list: ${error}`
-    );
-    res.redirect("/");
+    res
+      .status(400)
+      .json({ message: "there was an error fetching the datas", error });
   }
 };
 
 exports.show = async (req, res) => {
   try {
     const data = await Data.findById(req.params.id).populate("user");
-    console.log(data);
-    res.render(`${viewPath}/show`, {
-      pageTitle: data.title,
-      data: data,
-    });
+
+    res.status(200).json(blog);
   } catch (error) {
-    req.flash("danger", `There was an error displaying this data: ${error}`);
-    res.redirect("/");
+    res
+      .status(400)
+      .json({ message: "there was an error fetching the datas", error });
   }
 };
 
@@ -60,18 +36,16 @@ exports.new = (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    console.log(req.session.passport);
     const { user: email } = req.session.passport;
     const user = await User.findOne({ email: email });
-    console.log("User", user);
+
     const data = await Data.create({ user: user._id, ...req.body });
 
-    req.flash("success", "Data created successfully");
-    res.redirect(`/datas/${data.id}`);
+    res.status(200).json(blog);
   } catch (error) {
-    req.flash("danger", `There was an error creating this data: ${error}`);
-    req.session.formData = req.body;
-    res.redirect("/datas/new");
+    res
+      .status(400)
+      .json({ message: "There was an error creating the blog post", error });
   }
 };
 
@@ -112,10 +86,10 @@ exports.delete = async (req, res) => {
   try {
     console.log(req.body);
     await Data.deleteOne({ _id: req.body.id });
-    req.flash("success", "The data was deleted successfully");
-    res.redirect(`/datas`);
+    res.status(200).json({ message: "Yeah" });
   } catch (error) {
-    req.flash("danger", `There was an error deleting this data: ${error}`);
-    res.redirect(`/datas`);
+    res
+      .status(400)
+      .json({ message: "there was an error deleting the blogs", error });
   }
 };
